@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = 3000;
 const pg = require("pg");
-const client = new pg.client(
+const client = new pg.Client(
   process.env.DATABASE_URL ||
     "postgres://Torsk:wordpass@localhost:5432/icecream"
 );
@@ -18,7 +18,7 @@ app.listen(PORT, () => {
 app.get("/api/flavors", async (req, res, next) => {
   try {
     const SQL = `
-        SELECT * FROM flavors,
+        SELECT * FROM flavors
         `;
     const response = await client.query(SQL);
     res.status(200).json(response.rows);

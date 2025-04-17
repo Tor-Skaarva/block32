@@ -9,14 +9,16 @@ const init = async () => {
   try {
     await client.connect();
     const SQL = `
-    DROP TABLE IF EXISTS flavors
-    CREATE TABLE  flavors(
-    id PRIMARY KEY SERIAL,
+    DROP TABLE IF EXISTS flavors;
+    CREATE TABLE flavors(
+    id SERIAL PRIMARY KEY,
     flavor VARCHAR(40),
     is_favorite BOOLEAN DEFAULT TRUE,
-    created_at CREATE TIMESTAMP DEFAULT now(),
-    updated_at CREATE TIMESTAMP DEFAULT now(),
-    );
+    created_at TIMESTAMP DEFAULT now(),
+    updated_at TIMESTAMP DEFAULT now());
+    INSERT INTO flavors (flavor) VALUES ('Vanilla');
+     INSERT INTO flavors (flavor) VALUES ('Chocolate');
+      INSERT INTO flavors (flavor) VALUES ('Strawberry');
     `;
     await client.query(SQL);
     await client.end();
@@ -25,5 +27,5 @@ const init = async () => {
     console.error(error);
   }
 };
-//seed that bitch
+//seed
 init();
